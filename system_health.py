@@ -9,6 +9,7 @@ class SystemHealth:
         self.cpu = psutil.cpu_percent(interval=1)
         self.memory = psutil.virtual_memory().percent
         self.disk = psutil.disk_usage('/').percent
+        self.processes = psutil.pids()
 
     def get_all_usage(self):
         return self.cpu, self.memory, self.disk
@@ -38,7 +39,8 @@ class SystemHealth:
             print(f"Disk usage is {self.disk}%")
     
     def get_running_processes(self):
-        return psutil.pids()
+        number_of_processes = len(self.processes)
+        print(f"Number of running processes: {number_of_processes}")
 
 def main():
     print("Current system health:")
